@@ -16,6 +16,7 @@ print(sum(temp))
 '''
 
 # 1439
+'''
 data = input()
 temp = []
 for i in range(len(data)):
@@ -28,3 +29,4 @@ if temp.count('0') > temp.count('1'):
     print(temp.count('1'))
 else:
     print(temp.count('0'))
+'''
