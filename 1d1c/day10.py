@@ -19,22 +19,16 @@ for i in range(len(data)):
 
 # 14501 모르겠다
 n = int(input())
-day = []
-cost = []
-dp=[]
+times = []
+for _ in range(n):
+  times.append(list(map(int,input().split())))
+print(times)
+dp = [0] * n
 
 for i in range(n):
-  x,y = map(int, input().split())
-  day.append(x)
-  cost.append(y)
-  dp.append(y)
-dp.append(0)  #뒤에 0을 추가해서 인덱스초과 오류 방지
-
-#뒤에서부터 확인
-for i in range(n-1, -1, -1):
-  if day[i] + i > n: #데드라인이 기한을 넘어가는경우
-    dp[i] = dp[i+1]
-  else:
-    dp[i] = max(dp[i+1], cost[i]+dp[i+day[i]])
-
-print(dp[0])
+	if i + times[i][0] <= n:
+		dp[i] = times[i][1]
+		for j in range(i):
+			if j + times[j][0] <= i:
+				dp[i] = max(dp[i], dp[j] + times[i][1])
+print(max(dp))
