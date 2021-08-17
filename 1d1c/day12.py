@@ -1,4 +1,4 @@
-# 4811
+# 4811 어렵다
 arr = []
 def pill(n, arr):
     arr = [[0]*(n+1) for _ in range(n+1)]
