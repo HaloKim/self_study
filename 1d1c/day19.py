@@ -1,4 +1,4 @@
-# 2839
+# 2839 최소공배수를 생각했어야함
 n = int(input())
 count = 0
 while(True):
@@ -19,5 +19,4 @@ while(True):
     else:
         count = -1
         break
-    print(n)
 print(count)
