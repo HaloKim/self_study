@@ -1,3 +1,4 @@
+# 10026
 n = int(input())
 mat = []
 for _ in range(n):
