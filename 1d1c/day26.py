@@ -1,12 +1,11 @@
-# 2565 뭐가문제인지모르겠다
+# 2565 틀림
 '''
 n = int(input())
 temp = []
 for i in range(n):
     temp.append(list(map(int,input().split())))
-count = 1
-tmp = 0
 temp.sort()
+tmp = 0
 while(True):
     maximum = []
     for i in range(len(temp)):
@@ -22,10 +21,11 @@ while(True):
     if max(maximum) == 0:
         break
     temp.pop(maximum.index(max(maximum)))
+    print(temp)
     tmp += 1
 print(tmp)
 '''
-
+'''
 n = int(input())
 temp = []
 for i in range(n):
@@ -39,3 +39,24 @@ for i in range(n):
             lis[i] = max(lis[i], lis[j]+1)
 print(lis)
 print(n-max(lis))
+'''
+'''
+10
+1 6
+2 8
+3 2
+4 9
+5 5
+6 10
+7 4
+8 1
+9 7
+10 3
+
+5
+1 3
+2 1
+3 5
+4 2
+5 4
+'''
