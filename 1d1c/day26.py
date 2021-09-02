@@ -25,7 +25,7 @@ while(True):
     tmp += 1
 print(tmp)
 '''
-'''
+# 정확한 답
 n = int(input())
 temp = []
 for i in range(n):
@@ -39,7 +39,7 @@ for i in range(n):
             lis[i] = max(lis[i], lis[j]+1)
 print(lis)
 print(n-max(lis))
-'''
+
 '''
 10
 1 6
