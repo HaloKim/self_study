@@ -5,7 +5,7 @@ arr = []
 for i in range(m):
     arr.append(list(map(int, input().split())))
 arr.sort(key=lambda x: x[-1])
-print(arr)
+
 cycle_table = [i for i in range(n + 1)]
 
 def union(cycle_table, x, y):
