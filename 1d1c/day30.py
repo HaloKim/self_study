@@ -57,7 +57,6 @@ print(max(dp))
 '''
 # 14003 시간초과
 import bisect
-from day29 import find
 n = int(input())
 record = [0] * n
 arr = list(map(int,input().split()))
