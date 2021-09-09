@@ -12,5 +12,11 @@ def bfs():
     visit = [[0]*n for _ in range(n)]
     queue = []
     queue = deque()
-for i in range(m):
-    
+active = []
+wall = []
+for i in range(n):
+    for j in range(n):
+        if mat[i][j] == 2:
+            active.append([i,j])
+        if mat[i][j] == 1:
+            wall.append([i,j])
