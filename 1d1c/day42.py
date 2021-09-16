@@ -65,13 +65,7 @@ def bfs(a,b):
             if visit[x][y] == 0 and box[x][y] == 0:
                 print(x,y)
                 visit[x][y] = 1
-                for j in range(4):
-                    xx = x + dx[j]
-                    yy = y + dy[j]
-                    if xx < 0 or yy < 0 or xx > m-1 or yy > n-1:
-                        continue
-                    if box[xx][yy] > 0:
-                        box[x][y] = min(box[a][b] + 1, box[xx][yy]+1)
+                box[x][y] = box[a][b] + 1
                 q.append([x,y])
 
 for i in range(m):
