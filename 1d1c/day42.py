@@ -39,22 +39,21 @@ for i in range(n):
             bfs(i,j)
 print(visit[-1][-1])
 '''
-# 7576
+# 7576 틀림 심플하게 생각하자.
 import sys
 from collections import deque
+import copy
 n,m = map(int, sys.stdin.readline().split())
 box = []
 for _ in range(m):
     box.append(list(map(int, sys.stdin.readline().split())))
+box2 = copy.deepcopy(box)
 visit = [[0]*n for i in range(m)]
 dx = [0,0,1,-1]
 dy = [1,-1,0,0]
+q = deque()
 
-def bfs(a,b):
-    global visit
-    q = deque()
-    q.append([a,b])
-    visit[a][b] = 1
+def bfs():
     while q:
         a,b = q.popleft()
         for i in range(4):
@@ -63,13 +62,19 @@ def bfs(a,b):
             if x < 0 or y < 0 or x > m-1 or y > n-1:
                 continue
             if visit[x][y] == 0 and box[x][y] == 0:
-                print(x,y)
-                visit[x][y] = 1
                 box[x][y] = box[a][b] + 1
                 q.append([x,y])
 
 for i in range(m):
     for j in range(n):
-        if box[i][j] == 1 and visit[i][j] == 0:
-            bfs(i,j)
-print(box)
+        if box[i][j] == 1:
+            q.append([i,j])
+bfs()
+maxim = 0
+for i in range(m):
+    for j in range(n):
+        if box[i][j] == 0:
+            print(-1)
+            exit()
+        maxim = max(maxim, box[i][j])
+print(maxim-1)
