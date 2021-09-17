@@ -48,7 +48,7 @@ box = []
 for _ in range(m):
     box.append(list(map(int, sys.stdin.readline().split())))
 box2 = copy.deepcopy(box)
-visit = [[0]*n for i in range(m)]
+
 dx = [0,0,1,-1]
 dy = [1,-1,0,0]
 q = deque()
@@ -61,7 +61,7 @@ def bfs():
             y = b + dy[i]
             if x < 0 or y < 0 or x > m-1 or y > n-1:
                 continue
-            if visit[x][y] == 0 and box[x][y] == 0:
+            if box[x][y] == 0:
                 box[x][y] = box[a][b] + 1
                 q.append([x,y])
 
