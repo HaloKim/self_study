@@ -1,4 +1,4 @@
-# self_study
+# Self_study
 공부하자 😚
 
 ├── 1 Day 1 Code
