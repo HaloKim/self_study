@@ -60,6 +60,49 @@
 #     return
 # dfs(1)
 
-# 9663
-n = int(input())
+# 9663 시간초과
+# import sys
+# from collections import deque
+# n = int(sys.stdin.readline())
+# qeen = deque()
+# qeen = [0]*n
 
+# def dfs(qeen, row):
+#     cnt = 0
+#     if n == row:
+#         return 1
+#     for col in range(n):
+#         qeen[row] = col
+#         for i in range(row):
+#             if qeen[i] == qeen[row]:
+#                 break
+#             if abs(qeen[i]-qeen[row]) == row - i:
+#                 break
+#         else:
+#             cnt += dfs(qeen, row+1)
+#     return cnt
+
+# print(dfs(qeen, 0))
+
+# 최적화를 적용한 코드
+n = int(input())
+row_check = [False] * n
+left = [False] * (2*n-1)
+right = [False] * (2*n-1)
+cnt = 0
+
+
+def queen(qn):
+    global n, cnt
+    if qn == n:
+        cnt += 1
+        return
+    else:
+        for j in range(n):
+            if not row_check[j] and not left[j + qn] and not right[n-1 + qn - j]:
+                row_check[j] = left[j + qn] = right[n-1 + qn - j] = True
+                queen(qn + 1)
+                row_check[j] = left[j + qn] = right[n-1 + qn - j] = False
+
+queen(0)
+print(cnt)
