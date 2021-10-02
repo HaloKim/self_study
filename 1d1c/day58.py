@@ -1,65 +1,64 @@
-# 13460
+# 13460 매우어렵다
 import sys
 from collections import deque
 
 n,m = map(int, sys.stdin.readline().strip().split())
-board = [list(sys.stdin.readline().strip()) for _ in range(m)]
 
-visit = [[0]*n for _ in range(m)]
+board = []
 move  = [(1,0),(0,1),(-1,0),(0,-1)]
 
-def bfs(a,b,cnt):
-    global dr
-    chk = 0
-    redq = deque()
-    redq.append([a,b])
-    visit[a][b] = cnt+1
-    while redq:
-        a,b = redq.popleft()
-        if chk == 0:
-            for x,y in move:
-                dx = x + a
-                dy = y + b
-                if 0 <= dx < m and 0 <= dy < n:
-                    if board[dx][dy] == '.':
-                        redq.append(dx,dy)
-                        visit[dx][dy] = visit[a][b]
-                        chk = (x,y)
-                        dr = (dx,dy)
-                        print(visit)
-                    if board[dx][dy] == 'O':
-                        return (dx,dy)
-                    if board[dx][dy] == '#':
-                        return (dx,dy)
-        else:
-            dx = x + a
-            dy = y + b
-            if 0 <= dx < m and 0 <= dy < n:
-                if board[dx][dy] == '.':
-                    redq.append(dx,dy)
-                    visit[dx][dy] = visit[a][b]
-                    chk = (x,y)
-                    dr = (dx,dy)
-                    print(visit)
-                if board[dx][dy] == 'O':
-                        return (dx,dy)
-                if board[dx][dy] == '#':
-                    return (dx,dy)
-
-dr = 0
-db = 0
-
-for i in range(m):
-    for j in range(n):
+for i in range(n):
+    board.append(list(sys.stdin.readline().strip()))
+    for j in range(m):
         if board[i][j] == 'R':
-            dr = [i,j]
+            rx,ry = i,j
         if board[i][j] == 'B':
-            db = [i,j]
+            bx,by = i,j
 
-cnt = 0
-while True:
-    cnt += 1
-    a,b = bfs(dr[0],dr[1], cnt)
-    if board[a][b] == 'O':
-        print(visit[a][b])
-        break
+# 끝까지 이동하는 함수
+def moving(x,y,addx,addy):
+    while True:
+        x += addx
+        y += addy
+        if board[x][y] == '#':
+            x -= addx
+            y -= addy
+            break
+        if board[x][y] == 'O':
+            break
+    return x,y
+
+# 그래프탐색
+def bfs(rx,ry,bx,by,cnt):
+    # init
+    q = deque()
+    q.append((rx,ry,bx,by,cnt))
+    visit = []
+    visit.append((rx,ry,bx,by))
+
+    while q:
+        rx,ry,bx,by,cnt = q.popleft()
+        if cnt == 11:
+            print(-1)
+            return
+        if board[rx][ry] == 'O':
+            print(cnt)
+            return
+        for x,y in move:
+            nrx, nry = moving(rx,ry,x,y)
+            nbx, nby = moving(bx,by,x,y)
+            if board[nbx][nby] == 'O':
+                continue
+            if nrx == nbx and nry == nby:
+                if abs(nrx-rx) + abs(nry-ry) > abs(nbx-bx) + abs(nby-by):
+                    nrx -= x
+                    nry -= y
+                else:
+                    nbx -= x
+                    nby -= y
+            if (nrx,nry,nbx,nby) not in visit:
+                q.append((nrx,nry,nbx,nby,cnt+1))
+                visit.append((nrx,nry,nbx,nby))
+    print(-1)
+
+bfs(rx,ry,bx,by,0)
