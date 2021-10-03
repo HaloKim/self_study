@@ -1,5 +1,4 @@
 # 12100 매우어렵다..
-from collections import deque
 import copy
 
 n = int(input())
@@ -71,7 +70,7 @@ def left(board):
                     before = board[i][j]
             board[i][j] = 0
         if before != 0: 
-            board[i][j] = before
+            board[i][p] = before
     return board
 
 def right(board):
@@ -94,7 +93,7 @@ def right(board):
                     before = board[i][j]
             board[i][j] = 0
         if before != 0: 
-            board[i][j] = before
+            board[i][p] = before
     return board
             
 maxi = 0
