@@ -91,7 +91,6 @@ left = [False] * (2*n-1)
 right = [False] * (2*n-1)
 cnt = 0
 
-
 def queen(qn):
     global n, cnt
     if qn == n:
