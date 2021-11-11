@@ -2,41 +2,57 @@ from collections import deque
 from sys import stdin
 input = stdin.readline
 
-T = int(input().strip())
-h,w = map(int, input().strip().split())
-prizon = []
-p1 = []
-p2 = []
-q = deque()
-move = [[1,0],[-1,0],[0,1],[0,-1]]
-def bfs(visit,cnt):
+def bfs(x, y):
+    visit = [[-1] * (w + 2) for _ in range(h + 2)]
+    q.append([x, y])
+    visit[x][y] = 0
     while q:
-        x,y = q.popleft()
-        for a,b in move:
-            dx = a + x
-            dy = b + y
-            if 0 <= dx < h and 0 <= dy < w:
-                if visit[dx][dy] == 0:
-                    if x == h-1 and y == w-1:
-                        return
-                    if prizon[dx][dy] == '#':
-                        cnt += 1
-                        visit[dx][dy] = visit[x][y] + 1
-                    if prizon[dx][dy] == '.':
-                        visit[dx][dy] = visit[x][y]
-                    q.append([dx,dy])
+        x, y = q.popleft()
+        for a,b in (1,0),(-1,0),(0,1),(0,-1):
+            nx = x + a
+            ny = y + b
+            if 0 <= nx < h+2 and 0 <= ny < w+2:
+                if visit[nx][ny] == -1:
+                    if maze[nx][ny] == '.':
+                        visit[nx][ny] = visit[x][y]
+                        q.appendleft([nx, ny])
+                    elif maze[nx][ny] == '#':
+                        visit[nx][ny] = visit[x][y] + 1
+                        q.append([nx, ny])
+    return visit
 
-start = []
-for _ in range(T):
-    visit = [[0]*w for _ in range(h)]
-    for i in range(h):
-        temp = input().strip()
-        for j in range(len(temp)):
-            if '$' == temp[j]:
-                start.append([i,j])
-                visit[i][j] = 1
-        prizon.append(list(temp))
-    cnt = 0
-    bfs(start[0][0],start[0][1],visit,cnt)
-    bfs(start[1][0],start[1][1],visit,cnt)
-    print(visit)
+def new_map():
+    for i in maze:
+        i.insert(0, '.')
+        i.append('.')
+    maze.insert(0, ['.' for _ in range(w+2)])
+    maze.append(['.' for _ in range(w+2)])
+
+for _ in range(int(input())):
+    h, w = map(int, input().split())
+    maze = [list(input().strip()) for _ in range(h)]
+    q = deque()
+
+    new_map()
+
+    temp = []
+    for i in range(h + 2):
+        for j in range(w + 2):
+            if maze[i][j] == '$':
+                temp.extend([i, j])
+                maze[i][j] = '.'
+
+    x1, y1, x2, y2 = temp
+    c1 = bfs(0, 0)
+    c2 = bfs(x1, y1)
+    c3 = bfs(x2, y2)
+
+    ans = int(1e9)
+    for i in range(h+2):
+        for j in range(w+2):
+            if c1[i][j] != -1 and c2[i][j] != -1 and c3[i][j] != -1:
+                cnt = c1[i][j] + c2[i][j] + c3[i][j]
+                if maze[i][j] == '#':
+                    cnt -= 2
+                ans = min(ans, cnt)
+    print(ans)
