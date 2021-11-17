@@ -50,6 +50,10 @@
 # Character 
 - 모음사전
 
+# Brute force
+- 2798
+- 1436
+
 # else
 - 17141
 - 9252
