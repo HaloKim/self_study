@@ -50,11 +50,12 @@
 - 1010 mCn
 - 16953
 
-# Math
+# Math & Implement
 - 11401 페르마
 - 멀쩡한 사각형
 - 행렬의 곱셈
-- 키패드누르기 divmod
+- 키패드누르기 divmod(몫,나머지나옴)
+
 # Simulation
 - 2933 시뮬+DFS
 
@@ -64,6 +65,9 @@
 # Brute force
 - 2798
 - 1436
+
+# Devide and Conquer
+- 수식최대화
 
 # else
 - 17141
