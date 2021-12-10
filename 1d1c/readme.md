@@ -71,8 +71,9 @@
 # Simulation
 - 2933 시뮬+DFS
 
-# Character 
+# String 
 - 모음사전
+- 튜플
 
 # Brute force
 - 2798
