@@ -17,8 +17,7 @@
 3. Some weights of AlbertModel were not initialized from the model checkpoint at /content/drive/MyDrive/albert_model and are newly initialized: ['albert.pooler.weight', 'albert.pooler.bias']
 You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
 - Hugging Face의 Scratch Train에서 run_mlm을 사용하면 뜨는 경고, 이 모델에서 풀러를 사용하지 않기 때문에 당연히 뜨는 경고
-
-- NLP Deep Learning Model 역사
+4. NLP Deep Learning Model 역사
 ![image](https://user-images.githubusercontent.com/44603549/149050885-16a02f7b-045d-4334-83f9-e30af53606f2.png)
 [출처](https://sungalex.github.io/ai/ai&qa/%EC%9E%90%EC%97%B0%EC%96%B4%EC%B2%98%EB%A6%AC/2020/05/18/Study6-NLP-DeepLearning-RNN-BERT.html)
 
